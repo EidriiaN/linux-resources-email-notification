@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linux Email Notifier Generator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Linux Email Notifier Generator</h1>
+
+        <div class="section">
+            <h2>Email Settings</h2>
+            <label for="recipientEmail">Recipient Email:</label>
+            <input type="email" id="recipientEmail" placeholder="your_email@example.com" required>
+
+            <label for="senderEmail">Sender Email (for mail command):</label>
+            <input type="email" id="senderEmail" value="root@your-domain.com" placeholder="root@your-domain.com">
+
+            <p class="note">Make sure your system's `mail` command is configured to send emails. You might need to install and configure `postfix` or `sendmail`.</p>
+        </div>
+
+        <div class="section">
+            <h2>Notification Resources</h2>
+
+            <div class="resource-group">
+                <h3>Disk Usage</h3>
+                <input type="checkbox" id="notifyDisk">
+                <label for="notifyDisk">Enable Disk Usage Notification</label>
+                <div class="resource-options" id="diskOptions">
+                    <label for="diskThreshold">Threshold (%):</label>
+                    <input type="number" id="diskThreshold" value="80" min="1" max="100">
+                </div>
+            </div>
+
+            <div class="resource-group">
+                <h3>CPU Usage</h3>
+                <input type="checkbox" id="notifyCpu">
+                <label for="notifyCpu">Enable CPU Usage Notification</label>
+                <div class="resource-options" id="cpuOptions">
+                    <label for="cpuThreshold">Threshold (%):</label>
+                    <input type="number" id="cpuThreshold" value="90" min="1" max="100">
+                    <p class="note">Requires `sysstat` (for `mpstat`). Install with `sudo apt install sysstat` (Debian/Ubuntu) or `sudo yum install sysstat` (RHEL/CentOS).</p>
+                </div>
+            </div>
+
+            <div class="resource-group">
+                <h3>Memory Usage</h3>
+                <input type="checkbox" id="notifyMemory">
+                <label for="notifyMemory">Enable Memory Usage Notification</label>
+                <div class="resource-options" id="memoryOptions">
+                    <label for="memoryThreshold">Threshold (%):</label>
+                    <input type="number" id="memoryThreshold" value="85" min="1" max="100">
+                </div>
+            </div>
+
+            <div class="resource-group">
+                <h3>Specific Service Status (e.g., Apache2, Nginx, MySQL)</h3>
+                <input type="checkbox" id="notifyService">
+                <label for="notifyService">Enable Service Status Notification</label>
+                <div class="resource-options" id="serviceOptions">
+                    <label for="serviceName">Service Name (e.g., apache2, nginx, mysql):</label>
+                    <input type="text" id="serviceName" placeholder="e.g., apache2">
+                </div>
+            </div>
+
+            <div class="resource-group">
+                <h3>Failed SSH Login Attempts</h3>
+                <input type="checkbox" id="notifySshFailed">
+                <label for="notifySshFailed">Enable Failed SSH Login Attempts Notification</label>
+                <div class="resource-options" id="sshFailedOptions">
+                    <label for="sshAttempts">Attempts Threshold:</label>
+                    <input type="number" id="sshAttempts" value="5" min="1">
+                    <p class="note">Requires `grep` and `awk`.</p>
+                </div>
+            </div>
+
+        </div>
+
+        <button id="generateScript">Generate Script</button>
+
+        <div class="script-output">
+            <h2>Generated Linux Script</h2>
+            <pre><code id="linuxScript"></code></pre>
+            <button id="copyScript">Copy Script to Clipboard</button>
+            <p class="note">Copy the script, save it as a `.sh` file (e.g., `notifier.sh`), make it executable (`chmod +x notifier.sh`), and then set up a cron job to run it regularly (e.g., `crontab -e`).</p>
+            <p class="note">Example cron job for running every 5 minutes: `*/5 * * * * /path/to/your/notifier.sh`</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
