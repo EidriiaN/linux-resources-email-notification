@@ -19,7 +19,7 @@ This repository contains a simple web-based tool to generate a Bash script for m
 The web application (HTML, CSS, JavaScript) provides a user-friendly interface to select monitoring options and set thresholds. Based on your inputs, it dynamically generates a Bash script. This Bash script, when executed on your Linux server, performs the checks and sends email alerts using the `mail` command.
 
 **Important Note on Email Sending:**
-The generated script leverages your server's configured Mail Transfer Agent (MTA) like Exim4 (as used in the troubleshooting context) or Postfix. It's crucial that your MTA is correctly set up to send emails externally, including proper SPF, DKIM, and PTR records for the sender domain. This generator provides the script logic; the underlying email infrastructure on your server must be functional.
+The generated script leverages your server's configured Mail Transfer Agent (MTA) like Exim4 or Postfix. It's crucial that your MTA is correctly set up to send emails externally, including proper SPF, DKIM, and PTR records for the sender domain. This generator provides the script logic; the underlying email infrastructure on your server must be functional.
 
 ## Getting Started
 
