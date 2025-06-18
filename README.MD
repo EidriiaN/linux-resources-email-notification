@@ -100,7 +100,7 @@ For the generated script to function correctly on your Linux server, ensure the 
 If you don't receive emails:
 
 1.  **Check Exim4/MTA Logs**: The most important step. Run `tail -f /var/log/exim4/mainlog` (or your MTA's equivalent) after executing the script to see specific delivery errors. Look for messages related to "authentication," "relay access denied," or "unrouteable address."
-2.  **Sender Email Authentication**: Ensure the `Sender Email` you configured in the web tool uses a domain for which your server is properly authorized to send mail (via SPF and DKIM DNS records). If you're unsure, use a known working email from your HestiaCP setup (e.g., an address from `adrian-neagu.ro`).
+2.  **Sender Email Authentication**: Ensure the `Sender Email` you configured in the web tool uses a domain for which your server is properly authorized to send mail (via SPF and DKIM DNS records). If you're unsure, use a known working email from your HestiaCP setup.
 3.  **PTR Record**: Contact your VPS hosting provider to set a PTR record for your server's IP address that resolves to your server's hostname or a valid mail hostname. Gmail strictly enforces this.
 4.  **Firewall**: Verify that your server's firewall (e.g., UFW, iptables) allows outbound connections on SMTP ports (25, 465, 587).
 5.  **Spam Folder**: Always check the recipient's spam or junk mail folder.
